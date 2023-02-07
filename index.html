@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- This code is necessary to install the jquery library.  Just copy and paste it.-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+
+    <script>
+        let a;
+        let createImage = function(src, title,xcoord,ycoord) {
+            let img   = new Image();
+            img.src   = src;
+            img.alt   = title;
+            img.title = title;
+            img.left = xcoord;
+            img.top = ycoord;
+
+            return img;
+        };
+
+        let welcome = createImage("resources/welcome.png", "welcome", 50, 95);
+
+        let frog = createImage("resources/frog.png", "frog", 400, 540);
+
+        let life1 = createImage("resources/heart.png", "life1", 10,552.5);
+        let life2 = createImage("resources/heart.png", "life2", 65,552.5);
+        let life3 = createImage("resources/heart.png", "life3", 120,552.5);
+
+        let lives = 3;
+
+        let gameover = createImage("resources/gameover.png", "gameover", -60,20);
+
+        let alive1 = true;
+        let alive2 = true;
+        let alive3 = true;
+
+        let carSpeed;
+        let logSpeed;
+
+        let car1X = 900;
+        let car1Y = 350;
+        let car1 = createImage("resources/car1.png", "car1", car1X, car1Y);
+
+        let car2X = 500;
+        let car2Y = 350;
+        let car2 = createImage("resources/car2.jpg" , "car2", car2X, car2Y);
+
+        let car3X = 100;
+        let car3Y = 350;
+        let car3 = createImage("resources/car3.png", "car3", car3X, car3Y);
+
+        let car4X = 700;
+        let car4Y = 395;
+        let car4 = createImage("resources/car4.png" , "car4,", car4X, car4Y);
+
+        let car5X = 300;
+        let car5Y = 400;
+        let car5 = createImage("resources/car5.png", "car5", car5X, car5Y);
+
+        let car6X = -100;
+        let car6Y = 400;
+        let car6 = createImage("resources/car6.png", "car6", car6X, car6Y);
+
+        let car7X = 200;
+        let car7Y = 450;
+        let car7 = createImage("resources/car7.png", "car7", car7X, car7Y);
+
+        let car8X = 600;
+        let car8Y = 455;
+        let car8 = createImage("resources/car8.png" , "car8", car8X, car8Y);
+
+        let car9X = 1000;
+        let car9Y = 455;
+        let car9 = createImage("resources/car9.png", "car9", car9X, car9Y);
+
+        let car10X = 800;
+        let car10Y = 500;
+        let car10 = createImage("resources/car10.png" , "car10,", car10X, car10Y);
+
+        let car11X = 400;
+        let car11Y = 500;
+        let car11 = createImage("resources/car11.png", "car11", car11X, car11Y);
+
+        let car12X = 0;
+        let car12Y = 500;
+        let car12 = createImage("resources/car12.png", "car12", car12X, car12Y);
+
+
+
+        let log1X = 0;
+        let log1Y = 52.5;
+        let log1 = createImage("resources/log.png", "log1", log1X, log1Y);
+
+        let log2X = 300;
+        let log2Y = 52.5;
+        let log2 = createImage("resources/log.png", "log2", log2X, log2Y);
+
+        let log3X = 600;
+        let log3Y = 52.5;
+        let log3 = createImage("resources/log.png", "log3", log3X, log3Y);
+
+        let log4X = 900;
+        let log4Y = 52.5;
+        let log4 = createImage("resources/log.png", "log4", log4X, log4Y);
+
+        let log5X = 100;
+        let log5Y = 152.5;
+        let log5 = createImage("resources/log.png", "log5", log5X, log5Y);
+
+        let log6X = 400;
+        let log6Y = 152.5;
+        let log6 = createImage("resources/log.png", "log6", log6X, log6Y);
+
+        let log7X = 700;
+        let log7Y = 152.5;
+        let log7 = createImage("resources/log.png", "log7", log7X, log7Y);
+
+        let log8X = 1000;
+        let log8Y = 152.5;
+        let log8 = createImage("resources/log.png", "log8", log8X, log8Y);
+
+        let log9X = 100;
+        let log9Y = 252.5;
+        let log9 = createImage("resources/log.png", "log9", log9X, log9Y);
+
+        let log10X = 400;
+        let log10Y = 252.5;
+        let log10 = createImage("resources/log.png", "log10", log10X, log10Y);
+
+        let log11X = 700;
+        let log11Y = 252.5;
+        let log11 = createImage("resources/log.png", "log11", log11X, log11Y);
+
+        let log12X = 1000;
+        let log12Y = 252.5;
+        let log12 = createImage("resources/log.png", "log12", log12X, log12Y);
+
+
+        let lpad1X = 200;
+        let lpad1Y = 102.5;
+        let lpad1 = createImage("resources/lpad.png", "lpad1", lpad1X, lpad1Y);
+
+        let lpad2X = 450;
+        let lpad2Y = 102.5;
+        let lpad2 = createImage("resources/lpad.png", "lpad2", lpad2X, lpad2Y);
+
+        let lpad3X = 700;
+        let lpad3Y = 102.5;
+        let lpad3 = createImage("resources/lpad.png", "lpad3", lpad3X, lpad3Y);
+
+        let lpad4X = 200;
+        let lpad4Y = 202.5;
+        let lpad4 = createImage("resources/lpad.png", "lpad4", lpad4X, lpad4Y);
+
+        let lpad5X = 450;
+        let lpad5Y = 202.5;
+        let lpad5 = createImage("resources/lpad.png", "lpad5", lpad5X, lpad5Y);
+
+        let lpad6X = 700;
+        let lpad6Y = 202.5;
+        let lpad6 = createImage("resources/lpad.png", "lpad6", lpad6X, lpad6Y);
+
+        function initialize() {
+            drawBackground();
+            let ctx = document.getElementById("myCanvas").getContext("2d");
+            ctx.drawImage(frog,frog.left,frog.top,70,70);
+            ctx.drawImage(welcome,welcome.left,welcome.top, 800,160);
+        }
+        function startAnimation() {
+            let difficulty =  prompt("Choose a difficulty from one of these: easy, medium, hard, impossible");
+
+            if (difficulty === "easy" || difficulty ===  "medium" || difficulty ===  "hard"|| difficulty === "impossible") {
+                if (difficulty === "easy") {
+                    carSpeed = 2;
+                    logSpeed = 2;
+                    lives=3;
+                    frog.src = "resources/frog.png";
+                    frog.top = 540;
+                    frog.left = 400;
+                    alive1 = true;
+                    alive2 = true;
+                    alive3 = true;
+                    alert("You chose easy mode!");
+                }
+
+                if (difficulty === "medium") {
+                    carSpeed = 4;
+                    logSpeed = 4;
+                    lives=3;
+                    frog.src = "resources/frog.png";
+                    frog.top = 540;
+                    frog.left = 400;
+                    alive1 = true;
+                    alive2 = true;
+                    alive3 = true;
+                    alert("You chose medium mode!");
+                }
+
+
+                if (difficulty === "hard") {
+                    carSpeed = 6;
+                    logSpeed = 6;
+                    lives=3;
+                    frog.src = "resources/frog.png";
+                    frog.top = 540;
+                    frog.left = 400;
+                    alive1 = true;
+                    alive2 = true;
+                    alive3 = true;
+                    alert("You chose hard mode!");
+                }
+
+                if (difficulty === "impossible") {
+                    carSpeed = 12;
+                    logSpeed = 12;
+                    lives=3;
+                    frog.src = "resources/frog.png";
+                    frog.top = 540;
+                    frog.left = 400;
+                    alive1 = true;
+                    alive2 = true;
+                    alive3 = true;
+                    alert("Why have you made this decision? Good luck Mr. Franco!");
+                }
+
+                animate();
+            } else {
+                alert("You didn't chose a game option! Try again.")
+            }
+
+
+
+        }
+        function stopAnimation() {
+            cancelAnimationFrame(a);
+        }
+        //all functions in this method will run at the speed of your computers frame rate
+
+
+        function animate() {
+            a = requestAnimationFrame(animate);
+            drawBackground();
+            drawStuff();
+            checkCollision();
+
+        }
+
+        function drawStuff(){
+
+            let ctx = document.getElementById("myCanvas").getContext("2d");
+
+
+            ctx.drawImage(lpad1,lpad1X,lpad1Y,45,45);
+            ctx.drawImage(lpad2,lpad2X,lpad2Y,45,45);
+            ctx.drawImage(lpad3,lpad3X,lpad3Y,45,45);
+            ctx.drawImage(lpad4,lpad4X,lpad4Y,45,45);
+            ctx.drawImage(lpad5,lpad5X,lpad5Y,45,45);
+            ctx.drawImage(lpad6,lpad6X,lpad6Y,45,45);
+
+
+
+            log1X = log1X + logSpeed;
+            ctx.drawImage(log1, log1X, log1Y, 130,45);
+
+            if (log1X>1050){
+                log1X = -150;
+            }
+
+            log2X = log2X + logSpeed;
+            ctx.drawImage(log2, log2X, log2Y, 130,45);
+
+            if (log2X>1050){
+                log2X = -150;
+            }
+
+            log3X = log3X + logSpeed;
+            ctx.drawImage(log3, log3X, log3Y, 130,45);
+
+            if (log3X>1050){
+                log3X = -150;
+            }
+
+            log4X = log4X + logSpeed;
+            ctx.drawImage(log4, log4X, log4Y, 130,45);
+
+            if (log4X>1050){
+                log4X = -150;
+            }
+
+            log5X = log5X - logSpeed;
+            ctx.drawImage(log5, log5X, log5Y, 130,45);
+
+            if (log5X<-150){
+                log5X = 1050;
+            }
+
+            log6X = log6X - logSpeed;
+            ctx.drawImage(log6, log6X, log6Y, 130,45);
+
+            if (log6X<-150){
+                log6X = 1050;
+            }
+
+            log7X = log7X - logSpeed;
+            ctx.drawImage(log7, log7X, log7Y, 130,45);
+
+            if (log7X<-150){
+                log7X = 1050;
+            }
+
+            log8X = log8X - logSpeed;
+            ctx.drawImage(log8, log8X, log8Y, 130,45);
+
+            if (log8X<-150){
+                log8X = 1050;
+            }
+
+            log9X = log9X + logSpeed;
+            ctx.drawImage(log9, log9X, log9Y, 130,45);
+
+            if (log9X>1050){
+                log9X = -150;
+            }
+
+            log10X = log10X + logSpeed;
+            ctx.drawImage(log10, log10X, log10Y, 130,45);
+
+            if (log10X>1050){
+                log10X = -150;
+            }
+
+            log11X = log11X + logSpeed;
+            ctx.drawImage(log11, log11X, log11Y, 130,45);
+
+            if (log11X>1050){
+                log11X = -150;
+            }
+
+            log12X = log12X + logSpeed;
+            ctx.drawImage(log12, log12X, log12Y, 130,45);
+
+            if (log12X>1050){
+                log12X = -150;
+            }
+
+
+
+
+
+
+
+
+
+
+            ctx.drawImage(frog, frog.left, frog.top, 70, 70);
+
+
+
+            car1X = car1X-carSpeed;
+            ctx.drawImage(car1,car1X,car1Y,100,45);
+
+            if (car1X<-150){
+                car1X = 1050;
+            }
+
+            car2X = car2X-carSpeed;
+            ctx.drawImage(car2,car2X,car2Y, 90, 45);
+
+            if (car2X<-150){
+                car2X = 1050;
+            }
+
+            car3X = car3X - carSpeed;
+            ctx.drawImage(car3, car3X, car3Y, 105, 45);
+
+            if (car3X<-150){
+                car3X = 1050;
+            }
+
+            car4X = car4X - carSpeed;
+            ctx.drawImage(car4, car4X, car4Y, 100, 50);
+
+            if (car4X<-150){
+                car4X = 1050;
+            }
+
+            car5X = car5X -carSpeed;
+            ctx.drawImage(car5, car5X, car5Y, 100, 45);
+
+            if (car5X<-150){
+                car5X = 1050;
+            }
+
+            car6X = car6X - carSpeed;
+            ctx.drawImage(car6, car6X, car6Y, 100, 45);
+
+            if (car6X<-150){
+                car6X = 1050;
+            }
+
+            car7X = car7X + carSpeed;
+            ctx.drawImage(car7, car7X, car7Y, 100, 55);
+
+            if (car7X>1050){
+                car7X = -150;
+            }
+
+            car8X = car8X + carSpeed;
+            ctx.drawImage(car8, car8X, car8Y, 100, 45);
+
+            if (car8X>1050){
+                car8X = -150;
+            }
+
+            car9X = car9X + carSpeed;
+            ctx.drawImage(car9, car9X, car9Y, 100, 42);
+
+            if (car9X>1050){
+                car9X = -150;
+            }
+
+            car10X = car10X + carSpeed;
+            ctx.drawImage(car10, car10X, car10Y, 100, 42);
+
+            if (car10X>1050){
+                car10X = -150;
+            }
+
+            car11X = car11X + carSpeed;
+            ctx.drawImage(car11, car11X, car11Y, 100, 42);
+
+            if (car11X>1050){
+                car11X = -150;
+            }
+
+            car12X = car12X + carSpeed;
+            ctx.drawImage(car12, car12X, car12Y, 100, 42);
+
+            if (car12X>1050){
+                car12X = -150;
+            }
+
+
+            if (alive1 === true) {
+                ctx.drawImage(life1, life1.left, life1.top, 45, 45);
+            }
+
+            if (alive2 === true) {
+                ctx.drawImage(life2, life2.left, life2.top, 45, 45);
+            }
+
+
+            if (alive3 === true) {
+                ctx.drawImage(life3, life3.left, life3.top, 45, 45);
+            }
+
+
+
+
+        }
+
+
+        function drawBackground(){
+            let ctx = document.getElementById("myCanvas").getContext("2d");
+
+            ctx.fillStyle="#237754";   //sets the fill color (neon green)
+            ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
+
+            ctx.fillStyle="#353939";
+            ctx.fillRect(0,350,900,200);
+
+            ctx.fillStyle="#b38300";
+            ctx.fillRect(0,446,900,3);
+            ctx.fillRect(0,451,900,3);
+
+            ctx.fillStyle="#1470d0";
+            ctx.fillRect(0,50,900,250);
+
+        }
+
+
+
+        function checkCollision() {
+
+
+            if (frog.left+60>900 || frog.left<-10 || frog.top<-10 || frog.top+45 > 600) {
+
+                alert("You just went off the map! Get back on the course!");
+                frog.src = "resources/frog.png";
+                frog.top = 540;
+                frog.left = 400;
+
+            }
+
+
+
+            if (frog.top<-9){
+                frog.src = "resources/frogdown.png";
+                alert("Congratulations! You made it and won! Try playing a harder mode now and see how far you can get. :)");
+                frog.top = -9;
+                cancelAnimationFrame(a);
+            }
+
+
+
+
+            if (frog.left + 60 > car1X && frog.left < car1X + 90 && frog.top + 40 > car1Y && frog.top < car1Y + 35) {
+                alert("You have just collided with a car! You lose a life and start over.");
+                frog.src = "resources/frog.png";
+                frog.top = 540;
+                frog.left = 400;
+
+                if (lives === 1) {
+                    alive1 = false;
+                    alert("You have no more lives left! Game Over!");
+                    gameOver();
+                }
+
+                if (lives === 2) {
+                    alive2 = false;
+                    lives = 1;
+                }
+
+                if (lives === 3) {
+                    alive3 = false;
+                    lives = 2;
+                }
+            }
+
+
+            if (frog.left + 60 > car2X && frog.left < car2X + 80 && frog.top + 40 > car2Y && frog.top < car2Y + 35) {
+                alert("You have just collided with a car! You lose a life and start over.");
+                frog.src = "resources/frog.png";
+                frog.top = 540;
+                frog.left = 400;
+
+                if (lives === 1) {
+                    alive1 = false;
+                    alert("You have no more lives left! Game Over!");
+                    gameOver();
+                }
+
+                if (lives === 2) {
+                    alive2 = false;
+                    lives = 1;
+                }
+
+                if (lives === 3) {
+                    alive3 = false;
+                    lives = 2;
+                }
+            }
+
+
+            if (frog.left + 60 > car3X && frog.left < car3X + 95 && frog.top + 40 > car3Y && frog.top < car3Y + 35) {
+                alert("You have just collided with a car! You lose a life and start over.");
+                frog.src = "resources/frog.png";
+                frog.top = 540;
+                frog.left = 400;
+
+                if (lives === 1) {
+                    alive1 = false;
+                    alert("You have no more lives left! Game Over!");
+                    gameOver();
+                }
+
+                if (lives === 2) {
+                    alive2 = false;
+                    lives = 1;
+                }
+
+                if (lives === 3) {
+                    alive3 = false;
+                    lives = 2;
+                }
+            }
+
+
+            if (frog.left + 60 > car4X && frog.left < car4X + 90 && frog.top + 40 > car4Y && frog.top < car4Y + 40) {
+                alert("You have just collided with a car! You lose a life and start over.");
+                frog.src = "resources/frog.png";
+                frog.top = 540;
+                frog.left = 400;
+
+                if (lives === 1) {
+                    alive1 = false;
+                    alert("You have no more lives left! Game Over!");
+                    gameOver();
+                }
+
+                if (lives === 2) {
+                    alive2 = false;
+                    lives = 1;
+                }
+
+                if (lives === 3) {
+                    alive3 = false;
+                    lives = 2;
+                }
+            }
+
+
+            if (frog.left + 60 > car5X && frog.left < car5X + 90 && frog.top + 40 > car5Y && frog.top < car5Y + 35) {
+                alert("You have just collided with a car! You lose a life and start over.");
+                frog.src = "resources/frog.png";
+                frog.top = 540;
+                frog.left = 400;
+
+                if (lives === 1) {
+                    alive1 = false;
+                    alert("You have no more lives left! Game Over!");
+                    gameOver();
+                }
+
+                if (lives === 2) {
+                    alive2 = false;
+                    lives = 1;
+                }
+
+                if (lives === 3) {
+                    alive3 = false;
+                    lives = 2;
+                }
+            }
+
+
+            if (frog.left + 60 > car6X && frog.left < car6X + 90 && frog.top + 40 > car6Y && frog.top < car6Y + 35) {
+                alert("You have just collided with a car! You lose a life and start over.");
+                frog.src = "resources/frog.png";
+                frog.top = 540;
+                frog.left = 400;
+
+                if (lives === 1) {
+                    alive1 = false;
+                    alert("You have no more lives left! Game Over!");
+                    gameOver();
+                }
+
+                if (lives === 2) {
+                    alive2 = false;
+                    lives = 1;
+                }
+
+                if (lives === 3) {
+                    alive3 = false;
+                    lives = 2;
+                }
+            }
+
+            if (frog.left + 60 > car7X && frog.left < car7X + 90 && frog.top + 40 > car7Y && frog.top < car7Y + 40) {
+                alert("You have just collided with a car! You lose a life and start over.");
+                frog.src = "resources/frog.png";
+                frog.top = 540;
+                frog.left = 400;
+
+                if (lives === 1) {
+                    alive1 = false;
+                    alert("You have no more lives left! Game Over!");
+                    gameOver();
+                }
+
+                if (lives === 2) {
+                    alive2 = false;
+                    lives = 1;
+                }
+
+                if (lives === 3) {
+                    alive3 = false;
+                    lives = 2;
+                }
+            }
+
+
+            if (frog.left + 60 > car8X && frog.left < car8X + 90 && frog.top + 40 > car8Y && frog.top < car8Y + 30) {
+                alert("You have just collided with a car! You lose a life and start over.");
+                frog.src = "resources/frog.png";
+                frog.top = 540;
+                frog.left = 400;
+
+                if (lives === 1) {
+                    alive1 = false;
+                    alert("You have no more lives left! Game Over!");
+                    gameOver();
+                }
+
+                if (lives === 2) {
+                    alive2 = false;
+                    lives = 1;
+                }
+
+                if (lives === 3) {
+                    alive3 = false;
+                    lives = 2;
+                }
+            }
+
+
+            if (frog.left + 60 > car9X && frog.left < car9X + 90 && frog.top + 40 > car9Y && frog.top < car9Y + 30) {
+                alert("You have just collided with a car! You lose a life and start over.");
+                frog.src = "resources/frog.png";
+                frog.top = 540;
+                frog.left = 400;
+
+                if (lives === 1) {
+                    alive1 = false;
+                    alert("You have no more lives left! Game Over!");
+                    gameOver();
+                }
+
+                if (lives === 2) {
+                    alive2 = false;
+                    lives = 1;
+                }
+
+                if (lives === 3) {
+                    alive3 = false;
+                    lives = 2;
+                }
+            }
+
+            if (frog.left + 60 > car10X && frog.left < car10X + 90 && frog.top + 40 > car10Y && frog.top < car10Y + 30) {
+                alert("You have just collided with a car! You lose a life and start over.");
+                frog.src = "resources/frog.png";
+                frog.top = 540;
+                frog.left = 400;
+
+                if (lives === 1) {
+                    alive1 = false;
+                    alert("You have no more lives left! Game Over!");
+                    gameOver();
+                }
+
+                if (lives === 2) {
+                    alive2 = false;
+                    lives = 1;
+                }
+
+                if (lives === 3) {
+                    alive3 = false;
+                    lives = 2;
+                }
+            }
+
+
+            if (frog.left + 60 > car11X && frog.left < car11X + 90 && frog.top + 40 > car11Y && frog.top < car11Y + 30) {
+                alert("You have just collided with a car! You lose a life and start over.");
+                frog.src = "resources/frog.png";
+                frog.top = 540;
+                frog.left = 400;
+
+                if (lives === 1) {
+                    alive1 = false;
+                    alert("You have no more lives left! Game Over!");
+                    gameOver();
+                }
+
+                if (lives === 2) {
+                    alive2 = false;
+                    lives = 1;
+                }
+
+                if (lives === 3) {
+                    alive3 = false;
+                    lives = 2;
+                }
+            }
+
+
+            if (frog.left + 60 > car12X && frog.left < car12X + 90 && frog.top + 40 > car12Y && frog.top < car12Y + 30) {
+                alert("You have just collided with a car! You lose a life and start over.");
+                frog.src = "resources/frog.png";
+                frog.top = 540;
+                frog.left = 400;
+
+                if (lives === 1) {
+                    alive1 = false;
+                    alert("You have no more lives left! Game Over!");
+                    gameOver();
+                }
+
+                if (lives === 2) {
+                    alive2 = false;
+                    lives = 1;
+                }
+
+                if (lives === 3) {
+                    alive3 = false;
+                    lives = 2;
+                }
+            }
+
+
+
+
+            if (frog.left + 60 > 0 && frog.left < 900 && frog.top + 40 > 50 && frog.top < 290){
+
+
+
+
+                if (frog.left + 60 > log1X && frog.left < log1X + 120 && frog.top + 35 > log1Y && frog.top < log1Y + 35 || frog.left + 60 > log2X && frog.left < log2X + 120 && frog.top + 35 > log2Y && frog.top < log2Y + 35 || frog.left + 60 > log3X && frog.left < log3X + 120 && frog.top + 35 > log3Y && frog.top < log3Y + 35 || frog.left + 60 > log4X && frog.left < log4X + 120 && frog.top + 35 > log4Y && frog.top < log4Y + 35 || frog.left + 60 > log5X && frog.left < log5X + 120 && frog.top + 35 > log5Y && frog.top < log5Y + 35 || frog.left + 60 > log6X && frog.left < log6X + 120 && frog.top + 35 > log6Y && frog.top < log6Y + 35 || frog.left + 60 > log7X && frog.left < log7X + 120 && frog.top + 35 > log7Y && frog.top < log7Y + 35 || frog.left + 60 > log8X && frog.left < log8X + 120 && frog.top + 35 > log8Y && frog.top < log8Y + 35 || frog.left + 60 > log9X && frog.left < log9X + 120 && frog.top + 35 > log9Y && frog.top < log9Y + 35 || frog.left + 60 > log10X && frog.left < log10X + 120 && frog.top + 35 > log10Y && frog.top < log10Y + 35 || frog.left + 60 > log11X && frog.left < log11X + 120 && frog.top + 35 > log11Y && frog.top < log11Y + 35 || frog.left + 60 > log12X && frog.left < log12X + 120 && frog.top + 35 > log12Y && frog.top < log12Y + 35 || frog.left+60>lpad1X && frog.left<lpad1X+35 && frog.top + 40 > lpad1Y && frog.top<lpad1Y+35 || frog.left+60>lpad2X && frog.left<lpad2X+35 && frog.top + 40 > lpad2Y && frog.top<lpad2Y+35 || frog.left+60>lpad3X && frog.left<lpad3X+35 && frog.top + 40 > lpad3Y && frog.top<lpad3Y+35 || frog.left+60>lpad4X && frog.left<lpad4X+35 && frog.top + 40 > lpad4Y && frog.top<lpad4Y+35 || frog.left+60>lpad5X && frog.left<lpad5X+35 && frog.top + 40 > lpad5Y && frog.top<lpad5Y+35 || frog.left+60>lpad6X && frog.left<lpad6X+35 && frog.top + 40 > lpad6Y && frog.top<lpad6Y+35){
+
+
+                if (frog.left + 60 > log1X && frog.left < log1X + 120 && frog.top + 35 > log1Y && frog.top < log1Y + 35 || frog.left + 60 > log2X && frog.left < log2X + 120 && frog.top + 35 > log2Y && frog.top < log2Y + 35 || frog.left + 60 > log3X && frog.left < log3X + 120 && frog.top + 35 > log3Y && frog.top < log3Y + 35 || frog.left + 60 > log4X && frog.left < log4X + 120 && frog.top + 35 > log4Y && frog.top < log4Y + 35 || frog.left + 60 > log9X && frog.left < log9X + 120 && frog.top + 35 > log9Y && frog.top < log9Y + 35 || frog.left + 60 > log10X && frog.left < log10X + 120 && frog.top + 35 > log10Y && frog.top < log10Y + 35 || frog.left + 60 > log11X && frog.left < log11X + 120 && frog.top + 35 > log11Y && frog.top < log11Y + 35 || frog.left + 60 > log12X && frog.left < log12X + 120 && frog.top + 35 > log12Y && frog.top < log12Y + 35) {
+                    frog.left = frog.left + logSpeed;
+                }
+                    if (frog.left + 60 > log5X && frog.left < log5X + 120 && frog.top + 35 > log5Y && frog.top < log5Y + 35 || frog.left + 60 > log6X && frog.left < log6X + 120 && frog.top + 35 > log6Y && frog.top < log6Y + 35 || frog.left + 60 > log7X && frog.left < log7X + 120 && frog.top + 35 > log7Y && frog.top < log7Y + 35 || frog.left + 60 > log8X && frog.left < log8X + 120 && frog.top + 35 > log8Y && frog.top < log8Y + 35){
+                        frog.left = frog.left - logSpeed;
+
+                    }
+
+                } else {
+                    alert("You have just collided with the water! You lose a life and start over.");
+                    frog.src = "resources/frog.png";
+                    frog.top = 540;
+                    frog.left = 400;
+
+                    if (lives === 1) {
+                        alive1 = false;
+                        alert("You have no more lives left! Game Over!");
+                        gameOver();
+                    }
+
+                    if (lives === 2) {
+                        alive2 = false;
+                        lives = 1;
+                    }
+
+                    if (lives === 3) {
+                        alive3 = false;
+                        lives = 2;
+                    }
+                }
+
+
+
+
+            }
+
+
+
+
+
+
+
+
+
+
+        }
+
+        $(document).keydown(function(event){
+            let keycode = (event.keyCode ? event.keyCode : event.which);
+
+
+
+
+
+            if(keycode === 37) //left arrow
+            {
+                frog.left -=50;
+                frog.src = "resources/frogleft.png";
+
+            }
+            if(keycode === 38)  //up arrow
+            {
+                frog.top -=50;
+                frog.src = "resources/frog.png";
+
+            }
+            if(keycode === 39)  //right arrow
+            {
+
+                frog.left+=50;
+                frog.src = "resources/frogright.png";
+
+            }
+            if(keycode === 40)  //down arrow
+            {
+                frog.top+=50;
+
+                frog.src = "resources/frogdown.png";
+
+            }
+
+            //all key numbers can be found on the internet
+        });
+
+
+
+function gameOver(){
+    cancelAnimationFrame(a);
+    let ctx = document.getElementById("myCanvas").getContext("2d");
+
+
+        ctx.fillStyle = "#353939";
+        ctx.fillRect(0, 0, 900, 600);
+
+    ctx.drawImage(gameover, gameover.left, gameover.top, 1000, 600);
+
+
+}
+
+
+
+
+    </script>
+</head>
+<body onload="initialize()">
+<canvas id="myCanvas" width="900" height="600"
+        style="border:1px solid #000000;">
+</canvas>
+<button type="button" onclick="startAnimation()">Click to start game</button>
+<button type="button" onclick="stopAnimation()">Click to stop game</button>
+
+</body>
+</html>
+
